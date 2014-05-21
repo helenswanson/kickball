@@ -22,6 +22,13 @@ def unique_teams(teams)
   team_list
 end
 
+
+def unique_teams(teams)
+  teams.map {|player_info| player_info["team"]}.uniq
+end
+
+@team_list = unique_teams(teams)
+
 #create array of hashes containing first_name, last_name, position for people on a specific team
 def team_member_list(teams, team_url)
   team_members = []
@@ -48,14 +55,14 @@ end
 
 #display homepage with clickable team links
 get '/' do*
-  @teams = export_csv('.public/lackp_starting_rosters.csv')
+  @teams = export_csv('./public/lackp_starting_rosters.csv')
   @team_list = unique_teams(@teams)
   erb :index
 end
 
 get '/teams/:team_name' do
   @team_url = params[:team_name]
-  @teams = export_csv('.public/lackp_starting_rosters.csv')
+  @teams = export_csv('./public/lackp_starting_rosters.csv')
   @team_list = unique_teams(@teams)
   #array of hashes containing first_name, last_name, position for people on a specific team
   @team_members = team_member_list(@teams, @team_url)
