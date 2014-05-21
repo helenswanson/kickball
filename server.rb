@@ -12,14 +12,8 @@ def export_csv(filename)
 end
 
 #create array of unique teams, no repetition
-def unique_teams(teams)
-  team_list = []
-  teams.each do |player_info|
-    while !team_list.include?(player_info["team"]) #team is not in array
-      team_list << player_info["team"]
-    end
-  end
-  team_list
+def unique_teams(players)
+  players.map { |player| player['team'] }.uniq
 end
 
 #create array of hashes containing first_name, last_name, position for people on a specific team
